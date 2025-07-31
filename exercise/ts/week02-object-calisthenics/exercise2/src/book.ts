@@ -1,35 +1,32 @@
-export class Book {
-    private title: string;
-    private author: string;
-    private copies: number;
+import {Author, NumberOfCopies, Title} from "./BookStore";
 
-    constructor(title: string, author: string, copies: number) {
+export class Book {
+    private title: Title;
+    private author: Author;
+    private copies: NumberOfCopies;
+
+    constructor(title: Title, author: Author, copies: NumberOfCopies) {
         this.title = title;
         this.author = author;
         this.copies = copies;
     }
 
-    addCopies(additionalCopies: number): void {
+    addCopies(additionalCopies: NumberOfCopies): void {
         if (additionalCopies > 0) {
             this.copies += additionalCopies;
         }
     }
 
-    removeCopies(soldCopies: number): void {
+    removeCopies(soldCopies: NumberOfCopies): void {
         if (soldCopies > 0 && this.copies >= soldCopies) {
             this.copies -= soldCopies;
         }
     }
-
-    getTitle(): string {
-        return this.title;
+    isBook(title: Title, author: Author) {
+        return this.title === title && this.author === author;
     }
 
-    getAuthor(): string {
-        return this.author;
-    }
-
-    getCopies(): number {
-        return this.copies;
+    hasAtLeastOneCopy() {
+        return this.copies > 0;
     }
 }
